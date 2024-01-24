@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AppBar from './AppBar';
+import { LeftMenu } from './components/menus/menuExports';
 
 function App() {
   console.log(window.ipcRenderer);
@@ -40,8 +41,9 @@ function App() {
           <AppBar />
         </div>
       )}
-      <div className="flex-auto">
-        <div className=" flex flex-col justify-center items-center h-full bg-gray-800 space-y-4">
+      <div className="flex flex-grow">
+        <LeftMenu />
+        <div className="flex flex-col flex-grow justify-center items-center h-full bg-gray-800 space-y-4">
           <h1 className="text-2xl text-gray-200">Vite + React + Typescript + Electron + Tailwind</h1>
           <button
             className="bg-yellow-400 py-2 px-4 rounded focus:outline-none shadow hover:bg-yellow-200"
