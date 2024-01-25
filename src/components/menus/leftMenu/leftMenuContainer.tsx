@@ -2,11 +2,21 @@ import React from 'react';
 import LeftMenuButton from './leftMenuButton';
 import { leftMenuData } from './leftMenuData';
 
-const LeftMenuContainer: React.FC = () => {
+interface LeftMenuContainerProps {
+  setSelectedLeftMenuButton: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const LeftMenuContainer: React.FC<LeftMenuContainerProps> = ({ setSelectedLeftMenuButton }) => {
   return (
-    <div className="flex flex-col bg-gray-800 h-full w-64 p-4">
+    <div className="flex flex-col bg-gray-900 h-full w-64 p-4">
       {leftMenuData.map((buttonData, index) => (
-        <LeftMenuButton key={index} name={buttonData.name} icon={buttonData.icon} alt={buttonData.alt} />
+        <LeftMenuButton
+          key={index}
+          name={buttonData.name}
+          icon={buttonData.icon}
+          alt={buttonData.alt}
+          setSelectedLeftMenuButton={setSelectedLeftMenuButton}
+        />
       ))}
     </div>
   );

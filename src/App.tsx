@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AppBar from './AppBar';
-import { LeftMenu } from './components/menus/menuExports';
+import { LeftMenu, TopMenu } from './components/menus/menuExports';
 
 function App() {
   console.log(window.ipcRenderer);
@@ -8,6 +8,7 @@ function App() {
   const [isOpen, setOpen] = useState(false);
   const [isSent, setSent] = useState(false);
   const [fromMain, setFromMain] = useState<string | null>(null);
+  const [selectedLeftMenuButton, setSelectedLeftMenuButton] = useState('');
 
   const handleToggle = () => {
     if (isOpen) {
@@ -42,7 +43,9 @@ function App() {
         </div>
       )}
       <div className="flex flex-grow">
-        <LeftMenu />
+        <LeftMenu setSelectedLeftMenuButton={setSelectedLeftMenuButton} />
+        <div className="flex flex-col flex-grow">
+        <TopMenu selectedLeftMenuButton={selectedLeftMenuButton} />
         <div className="flex flex-col flex-grow justify-center items-center h-full bg-gray-800 space-y-4">
           <h1 className="text-2xl text-gray-200">Vite + React + Typescript + Electron + Tailwind</h1>
           <button
@@ -76,6 +79,7 @@ function App() {
             </div>
           )}
         </div>
+      </div>
       </div>
     </div>
   );
