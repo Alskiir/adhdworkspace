@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppBar from './AppBar';
 import { LeftMenu, TopMenu } from './components/menus/menuExports';
-import { ButtonOnePage, ButtonTwoPage, ButtonThreePage, ButtonFourPage } from './components/pages/pageExports'; 
+import { HomePageOne, HomePageTwo, BlockPageOne, BlockPageTwo } from './components/pages/pageExports'; 
 
 function App() {
   console.log(window.ipcRenderer);
@@ -22,10 +22,10 @@ function App() {
           <Router>
             <TopMenu selectedLeftMenuButton={selectedLeftMenuButton} />
             <Routes>
-              <Route path="/button1" element={<ButtonOnePage />} />
-              <Route path="/button2" element={<ButtonTwoPage />} />
-              <Route path="/button3" element={<ButtonThreePage />} />
-              <Route path="/button4" element={<ButtonFourPage />} />
+              <Route path="/" element={<HomePageOne />} />
+              <Route path="/HomeButton2" element={<HomePageTwo />} />
+              <Route path="/BlockButton1" element={<BlockPageOne />} />
+              <Route path="/BlockButton2" element={<BlockPageTwo />} />
               {/* Add other routes here */}
             </Routes>
           </Router>

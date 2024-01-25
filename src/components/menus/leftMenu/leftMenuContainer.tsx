@@ -10,13 +10,8 @@ const LeftMenuContainer: React.FC<LeftMenuContainerProps> = ({ setSelectedLeftMe
   return (
     <div className="flex flex-col bg-gray-900 h-full w-64 p-4">
       {leftMenuData.map((buttonData, index) => (
-        <LeftMenuButton
-          key={index}
-          name={buttonData.name}
-          icon={buttonData.icon}
-          alt={buttonData.alt}
-          setSelectedLeftMenuButton={setSelectedLeftMenuButton}
-        />
+        <LeftMenuButton key={index} {...buttonData} 
+        setSelectedLeftMenuButton={setSelectedLeftMenuButton} />
       ))}
     </div>
   );

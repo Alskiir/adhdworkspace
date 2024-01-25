@@ -12,7 +12,7 @@ const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ selectedLeftMenuBut
   return (
     <div className="flex flex-row bg-gray-700 h-16 w-full p-4">
       {topMenuButtons.map((buttonData, index) => (
-        <TopMenuButton key={index} name={buttonData.name} path={buttonData.path} />
+        <TopMenuButton key={index} {...buttonData} />
       ))}
     </div>
   );

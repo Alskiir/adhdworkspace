@@ -1,4 +1,4 @@
-export { default as ButtonOnePage } from './Button1/ButtonOnePage';
-export { default as ButtonTwoPage } from './Button1/ButtonTwoPage';
-export { default as ButtonThreePage } from './Button2/ButtonThreePage';
-export { default as ButtonFourPage } from './Button2/ButtonFourPage';
+export { default as HomePageOne } from './Home/homePageOne';
+export { default as HomePageTwo } from './Home/homePageTwo';
+export { default as BlockPageOne } from './Block/blockPageOne';
+export { default as BlockPageTwo } from './Block/blockPageTwo';

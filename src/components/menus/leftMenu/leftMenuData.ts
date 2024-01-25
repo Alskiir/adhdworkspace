@@ -1,11 +1,26 @@
 export const leftMenuData = [
   {
-    name: 'Button 1',
+    name: 'Home',
     icon: '',
     alt: ''
   },
   {
-    name: 'Button 2',
+    name: 'Block',
+    icon: '',
+    alt: ''
+  },
+  {
+    name: 'Tasks',
+    icon: '',
+    alt: ''
+  },
+  {
+    name: 'Statistics',
+    icon: '',
+    alt: ''
+  },
+  {
+    name: 'Settings',
     icon: '',
     alt: ''
   }
