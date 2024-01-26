@@ -3,7 +3,7 @@ import TopMenuButton from './topMenuButton';
 import { topMenuData } from './topMenuData';
 
 interface TopMenuContainerProps {
-  selectedLeftMenuButton: string; // The name of selected left menu button
+  selectedLeftMenuButton: string;
 }
 
 const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ selectedLeftMenuButton }) => {

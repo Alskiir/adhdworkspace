@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Defining properties for LeftMenuButton component
 interface LeftMenuButtonProps {
   icon: string; // URL of the icon
   name: string; // Name of the button

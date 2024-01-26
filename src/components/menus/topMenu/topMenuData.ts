@@ -1,4 +1,4 @@
-import { leftMenuData } from '../leftMenu/leftMenuData'; // adjust the path as needed
+import { leftMenuData } from '../leftMenu/leftMenuData';
 
 export const topMenuData = {
   [leftMenuData[0].name]: [

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Defining properties for TopMenuButton component
 interface TopMenuButtonProps {
   name: string; // Name of button
   path: string; // Path of button
