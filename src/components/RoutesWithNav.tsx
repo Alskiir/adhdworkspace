@@ -5,14 +5,12 @@ import { HomePageOne, HomePageTwo, BlockPageOne, BlockPageTwo } from './pages/pa
 
 interface RoutesWithNavProps {
   selectedLeftMenuButton: string;
-  setSelectedLeftMenuButton: React.Dispatch<React.SetStateAction<string>>;
   selectedTopMenuButton: string;
   setSelectedTopMenuButton: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const RoutesWithNav: React.FC<RoutesWithNavProps> = ({
   selectedLeftMenuButton,
-  setSelectedLeftMenuButton,
   selectedTopMenuButton,
   setSelectedTopMenuButton
 }) => {
@@ -28,7 +26,7 @@ const RoutesWithNav: React.FC<RoutesWithNavProps> = ({
         navigate(topMenuButtons[0].path);
       }
     }
-  }, [navigate, selectedLeftMenuButton, setSelectedLeftMenuButton, selectedTopMenuButton, setSelectedTopMenuButton]);
+  }, [navigate, selectedLeftMenuButton, selectedTopMenuButton, setSelectedTopMenuButton]);
 
   return (
     <Routes>
