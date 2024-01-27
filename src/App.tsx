@@ -23,7 +23,6 @@ function App() {
             <TopMenu selectedLeftMenuButton={selectedLeftMenuButton} />
             <RoutesWithNav
               selectedLeftMenuButton={selectedLeftMenuButton}
-              setSelectedLeftMenuButton={setSelectedLeftMenuButton}
               selectedTopMenuButton={selectedTopMenuButton}
               setSelectedTopMenuButton={setSelectedTopMenuButton}
             />
