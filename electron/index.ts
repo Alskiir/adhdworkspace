@@ -14,11 +14,13 @@ function createWindow() {
     width,
     height,
     //  change to false to use AppBar
-    frame: false,
+    frame: true,
     show: true,
     resizable: true,
     fullscreenable: true,
     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,
       preload: join(__dirname, 'preload.js')
     }
   });

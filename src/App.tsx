@@ -11,11 +11,12 @@ function App() {
 
   return (
     <div className="flex flex-col h-screen">
-      {window.Main && (
+      {/* Uncomment to use AppBar */}
+      {/* {window.Main && (
         <div className="flex-none">
           <AppBar />
         </div>
-      )}
+      )} */}
       <div className="flex flex-grow">
         <LeftMenu setSelectedLeftMenuButton={setSelectedLeftMenuButton} />
         <div className="flex flex-col flex-grow">
