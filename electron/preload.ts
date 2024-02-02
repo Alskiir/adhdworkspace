@@ -4,17 +4,11 @@ declare global {
   interface Window {
     Main: typeof api;
     ipcRenderer: typeof ipcRenderer;
+    electron: {
+      killProcess: () => void;
+      // Add other methods or properties here
+    };
   }
-}
-
-declare global {
-  interface Window {
-    killProcess: () => void;
-  }
-}
-
-window.killProcess = function() {
-  ipcRenderer.send('killProcess');
 }
 
 const api = {
@@ -53,3 +47,14 @@ contextBridge.exposeInMainWorld('Main', api);
  * I advise using the Main/api way !!
  */
 contextBridge.exposeInMainWorld('ipcRenderer', ipcRenderer);
+
+contextBridge.exposeInMainWorld('versions', {
+  node: () => process.versions.node,
+  chrome: () => process.versions.chrome,
+  electron: () => process.versions.electron,
+  // we can also expose variables, not just functions
+})
+
+contextBridge.exposeInMainWorld('electron', {
+  killProcess: () => ipcRenderer.send('killProcess')
+});

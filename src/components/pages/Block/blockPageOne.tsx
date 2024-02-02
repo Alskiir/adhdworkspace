@@ -2,7 +2,7 @@ import React from 'react';
 
 const BlockPageOne: React.FC = () => {
   const handleClick = () => {
-    window.killProcess();
+    window.electron.killProcess();
     console.log('Kill Process');
   };
 
