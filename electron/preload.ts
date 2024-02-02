@@ -7,6 +7,16 @@ declare global {
   }
 }
 
+declare global {
+  interface Window {
+    killProcess: () => void;
+  }
+}
+
+window.killProcess = function() {
+  ipcRenderer.send('killProcess');
+}
+
 const api = {
   /**
    * Here you can expose functions to the renderer process

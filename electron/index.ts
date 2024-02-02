@@ -4,6 +4,7 @@ import { join } from 'path';
 // Packages
 import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron';
 import isDev from 'electron-is-dev';
+const { exec } = require('child_process');
 
 const height = 750;
 const width = 1150;
@@ -20,7 +21,7 @@ function createWindow() {
     fullscreenable: true,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: true,
+      contextIsolation: false,
       preload: join(__dirname, 'preload.js')
     }
   });
@@ -80,4 +81,34 @@ app.on('window-all-closed', () => {
 ipcMain.on('message', (event: IpcMainEvent, message: any) => {
   console.log(message);
   setTimeout(() => event.sender.send('message', 'hi from electron'), 500);
+});
+
+
+// Kills Processes on Windows and Unix Based
+function killProcess() {
+  let yourProcess = 'notepad';
+
+  if (process.platform === 'win32') {
+    exec(`taskkill /IM ${yourProcess}.exe /F`, (error: Error | null, stdout: string, stderr: string) => {
+      if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
+      console.error(`stderr: ${stderr}`);
+    });
+  } else {
+    exec(`pkill ${yourProcess}`, (error: Error | null, stdout: string, stderr: string) => {
+      if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
+      console.error(`stderr: ${stderr}`);
+    });
+  }
+}
+
+ipcMain.on('killProcess', (_event, _arg) => {
+  killProcess();
 });
