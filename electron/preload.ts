@@ -6,6 +6,7 @@ declare global {
     ipcRenderer: typeof ipcRenderer;
     electron: {
       killProcess: () => void;
+      detectProcess: () => boolean;
     };
   }
 }
@@ -54,7 +55,10 @@ contextBridge.exposeInMainWorld('versions', {
   // we can also expose variables, not just functions
 });
 
-// Expose the killProcess function to the renderer process
+// Expose functions to the renderer process
 contextBridge.exposeInMainWorld('electron', {
-  killProcess: () => ipcRenderer.send('killProcess')
+  detectProcess: async () => {
+    return await ipcRenderer.invoke('detectProcess');
+  },
+  killProcess: () => ipcRenderer.send('killProcess'),
 });

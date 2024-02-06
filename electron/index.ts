@@ -5,7 +5,9 @@ import { join } from 'path';
 import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron';
 import isDev from 'electron-is-dev';
 
-import { killProcess } from './killProcess';
+// Local utils
+import { killProcess } from './utils/killProcess';
+import { detectProcess } from './utils/detectProcess';
 
 const height = 750;
 const width = 1150;
@@ -84,5 +86,6 @@ ipcMain.on('message', (event: IpcMainEvent, message: any) => {
   setTimeout(() => event.sender.send('message', 'hi from electron'), 500);
 });
 
-// Listen for the killProcess event and call the killProcess function
+// Listen for events and call the functions
 killProcess();
+detectProcess();
