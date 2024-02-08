@@ -5,7 +5,7 @@ import { join } from 'path';
 import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron';
 import isDev from 'electron-is-dev';
 
-import { killProcess } from './killProcess';
+import { killProcess } from './utils/killProcess';
 
 const height = 750;
 const width = 1150;
