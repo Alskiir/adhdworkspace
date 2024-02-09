@@ -6,6 +6,8 @@ import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron';
 import isDev from 'electron-is-dev';
 
 import { killProcess } from './utils/killProcess';
+// import { detectProcess } from './utils/detectProcess';
+import { startPomodoro, stopPomodoro } from './utils/pomodoro';
 
 const height = 750;
 const width = 1150;
@@ -84,5 +86,23 @@ ipcMain.on('message', (event: IpcMainEvent, message: any) => {
   setTimeout(() => event.sender.send('message', 'hi from electron'), 500);
 });
 
-// Listen for the killProcess event and call the killProcess function
+// Listen for events and call the functions
 killProcess();
+// detectProcess();
+
+let timers: Record<string, NodeJS.Timeout> = {};
+
+ipcMain.handle('start-pomodoro', (_event, isWorking: boolean, duration: number, shortBreak: number, longBreak: number, cycles: number) => {
+  const timerId = Math.random().toString(36).slice(2);
+  const timer = startPomodoro(isWorking, duration, shortBreak, longBreak, cycles);
+  timers[timerId] = timer;
+  return timerId;
+});
+
+ipcMain.handle('stop-pomodoro', (_event, timerId: string) => {
+  const timer = timers[timerId];
+  if (timer) {
+    stopPomodoro(timer);
+    delete timers[timerId];
+  }
+});

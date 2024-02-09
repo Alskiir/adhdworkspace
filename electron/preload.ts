@@ -6,6 +6,7 @@ declare global {
     ipcRenderer: typeof ipcRenderer;
     electron: {
       killProcess: () => void;
+      // detectProcess: () => void;
     };
   }
 }
@@ -38,7 +39,20 @@ const api = {
    */
   on: (channel: string, callback: (data: any) => void) => {
     ipcRenderer.on(channel, (_, data) => callback(data));
-  }
+  },
+  killProcess: () => {
+    ipcRenderer.send('killProcess');
+  },
+  // detectProcess: () => {
+  //   ipcRenderer.send('detectProcess');
+  // },
+  startPomodoro: async (isWorking: boolean, duration: number, shortBreak: number, longBreak: number, cycles: number) => {
+    const timerId = await ipcRenderer.invoke('start-pomodoro', isWorking, duration, shortBreak, longBreak, cycles);
+    return timerId;
+  },
+  stopPomodoro: (timerId: NodeJS.Timeout) => {
+    ipcRenderer.invoke('stop-pomodoro', timerId);
+  },
 };
 contextBridge.exposeInMainWorld('Main', api);
 /**
@@ -52,9 +66,4 @@ contextBridge.exposeInMainWorld('versions', {
   chrome: () => process.versions.chrome,
   electron: () => process.versions.electron
   // we can also expose variables, not just functions
-});
-
-// Expose the killProcess function to the renderer process
-contextBridge.exposeInMainWorld('electron', {
-  killProcess: () => ipcRenderer.send('killProcess')
 });
