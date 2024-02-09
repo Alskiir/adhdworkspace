@@ -40,12 +40,27 @@ const api = {
   on: (channel: string, callback: (data: any) => void) => {
     ipcRenderer.on(channel, (_, data) => callback(data));
   },
-  killProcess: () => {
+  off: (channel: string, _data: any) => {
+    ipcRenderer.removeAllListeners(channel);
+  },
+  /**
+   * Functions for Processes
+   */
+  sendKillProcess: () => {
     ipcRenderer.send('killProcess');
   },
-   detectProcess: async () => {
-     return await ipcRenderer.invoke('detectProcess');
-   },
+  sendDetectProcess: async () => {
+    return await ipcRenderer.invoke('detectProcess');
+  },
+  /**
+   * Functions for Timer
+   */
+  sendStartTime: (time: number) => {
+    ipcRenderer.send('start-timer', time);
+  },
+  sendStopTime: () => {
+    ipcRenderer.send('stop-timer');
+  }
 };
 contextBridge.exposeInMainWorld('Main', api);
 /**

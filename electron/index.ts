@@ -5,8 +5,10 @@ import { join } from 'path';
 import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron';
 import isDev from 'electron-is-dev';
 
+// Local Utils
 import { killProcess } from './utils/killProcess';
 import { detectProcess } from './utils/detectProcess';
+import { Pomodoro } from './utils/pomodoro';
 
 const height = 750;
 const width = 1150;
@@ -88,3 +90,15 @@ ipcMain.on('message', (event: IpcMainEvent, message: any) => {
 // Listen for events and call the functions
 killProcess();
 detectProcess();
+
+let pomodoro = new Pomodoro();
+// Listen for the 'start-timer' event and call the start function
+ipcMain.on('start-timer', (event, time) => {
+  pomodoro.start(time, () => {
+    event.sender.send('time-update', pomodoro.time);
+  });
+});
+
+ipcMain.on('stop-timer', () => {
+  pomodoro.stop();
+});
