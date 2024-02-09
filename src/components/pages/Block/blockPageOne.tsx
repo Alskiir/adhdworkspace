@@ -1,9 +1,14 @@
 import React from 'react';
 
 const BlockPageOne: React.FC = () => {
-  const handleClick = () => {
-    window.electron.killProcess();
-    console.log('Kill Process');
+  const killProcessButton = () => {
+    window.Main.killProcess();
+    console.log('Kill Process button clicked');
+  };
+
+  const detectProcessButton = () => {
+    window.Main.detectProcess();
+    console.log('Detect Process button clicked');
   };
 
   return (
@@ -13,9 +18,15 @@ const BlockPageOne: React.FC = () => {
       </h1>
       <button
         className="flex items-center justify-center bg-blue-500 hover:bg-blue-700 active:bg-blue-800 text-white font-bold py-2 px-4 rounded mb-2"
-        onClick={handleClick}
+        onClick={killProcessButton}
       >
-        Block Process
+        Kill Process
+      </button>
+      <button
+        className="flex items-center justify-center bg-blue-500 hover:bg-blue-700 active:bg-blue-800 text-white font-bold py-2 px-4 rounded mb-2"
+        onClick={detectProcessButton}
+      >
+        Detect Process
       </button>
     </div>
   );

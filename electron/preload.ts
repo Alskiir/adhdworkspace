@@ -6,6 +6,7 @@ declare global {
     ipcRenderer: typeof ipcRenderer;
     electron: {
       killProcess: () => void;
+      detectProcess: () => boolean;
     };
   }
 }
@@ -38,7 +39,13 @@ const api = {
    */
   on: (channel: string, callback: (data: any) => void) => {
     ipcRenderer.on(channel, (_, data) => callback(data));
-  }
+  },
+  killProcess: () => {
+    ipcRenderer.send('killProcess');
+  },
+   detectProcess: async () => {
+     return await ipcRenderer.invoke('detectProcess');
+   },
 };
 contextBridge.exposeInMainWorld('Main', api);
 /**
@@ -46,15 +53,3 @@ contextBridge.exposeInMainWorld('Main', api);
  * I advise using the Main/api way !!
  */
 contextBridge.exposeInMainWorld('ipcRenderer', ipcRenderer);
-
-contextBridge.exposeInMainWorld('versions', {
-  node: () => process.versions.node,
-  chrome: () => process.versions.chrome,
-  electron: () => process.versions.electron
-  // we can also expose variables, not just functions
-});
-
-// Expose the killProcess function to the renderer process
-contextBridge.exposeInMainWorld('electron', {
-  killProcess: () => ipcRenderer.send('killProcess')
-});

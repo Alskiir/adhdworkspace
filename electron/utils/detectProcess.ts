@@ -24,10 +24,10 @@ export const detectProcess = () => {
         exec(`pgrep ${yourProcess}`, (error: Error | null, stdout: string, _stderr: string) => {
           if (error || !stdout) {
             resolve(false);
-            console.log('Process not found' + `${yourProcess}`);
+            console.log('Process not found: ' + `${yourProcess}`);
           } else {
             resolve(true);
-            console.log('Process found' + `${yourProcess}`);
+            console.log('Process found: ' + `${yourProcess}`);
           }
         });
       }
